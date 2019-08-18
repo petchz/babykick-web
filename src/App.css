@@ -9,14 +9,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #f3ccd7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -30,4 +30,31 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.regis-form {
+  margin-top: 20px;
+}
+
+input {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+body {
+  font-family: 'Mali';
+}
+
+button {
+  color: white !important ;
+  background-color: #db5e88 !important;
+  border-color: #db5e88 !important;
+}
+
+img {
+  height: 120px;
+  margin-top: 20px;
 }
