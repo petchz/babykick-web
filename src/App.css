@@ -32,8 +32,13 @@
   }
 }
 
-.regis-form {
+.Regis-form {
   margin-top: 20px;
+}
+
+.hide {
+  visibility: hidden;
+  display: none;
 }
 
 input {
