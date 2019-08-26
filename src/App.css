@@ -32,13 +32,21 @@
   }
 }
 
+/* REGISTER PAGE */
+
 .Regis-form {
   margin-top: 20px;
 }
 
+.form-control {
+  display: inline !important;
+  font-size: 0.8rem !important;
+  padding: 1.1rem 1.5rem;
+}
+
 .hide {
-  visibility: hidden;
-  display: none;
+  visibility: hidden !important;
+  display: none !important;
 }
 
 input {
@@ -51,6 +59,7 @@ input {
 
 body {
   font-family: 'Mali';
+  font-weight: bold;
 }
 
 button {
@@ -62,4 +71,9 @@ button {
 img {
   height: 120px;
   margin-top: 20px;
+}
+
+/* COUNT PAGE */
+.butt-margin {
+  margin-right: 5rem;
 }
