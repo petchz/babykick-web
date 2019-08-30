@@ -9,10 +9,8 @@ export default class App extends Component {
     return (
       <div>
         <div>
-          <Register/>
-        </div>
-        <div>
           <Countctt/>
+          {/* <Register/> */}
         </div>
       </div>
     );

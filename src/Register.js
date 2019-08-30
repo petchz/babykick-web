@@ -76,7 +76,7 @@ export default class Register extends Component {
             {this.state.line_id}
           </div> */}
 
-          <div className="Regis-form">
+          <div className="form">
             <Form onSubmit={this.submitHandler}>
               
               <Form.Group>
