@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Register from './Register'
-import Countctt from './Countctt'
+import Count2ten from './Count2ten'
 
 export default class App extends Component {
 
@@ -9,7 +9,7 @@ export default class App extends Component {
     return (
       <div>
         <div>
-          <Countctt/>
+          <Count2ten/>
           {/* <Register/> */}
         </div>
       </div>

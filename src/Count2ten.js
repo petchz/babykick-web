@@ -30,17 +30,24 @@ export default class Countctt extends Component {
     window.addEventListener('load', this.initialize);
   }
 
+  // handle change in form (UID)
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  // Function to begin to count
   beginHandler = e => {
     e.preventDefault()
     console.log(this.state)
+    
     axios
-      .post('https://6e1fb152.ngrok.io/timer/counttoten', this.state)
+      .post('https://localhost:3001/timer/counttoten', this.state)
       .then(response => {
         console.log(response)
+
+      document.getElementById('newCount').style.display = "none";
+      document.getElementById('countPage').style.display = "block";
+
         this.state.count = 0;
       })
       .catch(error => {
@@ -48,12 +55,13 @@ export default class Countctt extends Component {
       })
   }
 
+  // Function to increase counting number value
   incHandler = e => {
     e.preventDefault()
     console.log(this.state)
     const { line_id } = this.state;
     axios
-      .post('https://6e1fb152.ngrok.io/ctt/increasing/' + line_id, this.state)
+      .post('https://localhost:3001/ctt/increasing/' + line_id, this.state)
       .then(response => {
         console.log(response)
         this.setState({ data: response.data })
@@ -75,12 +83,13 @@ export default class Countctt extends Component {
       })
   }
 
+  // Function to decrease counting number value
   decHandler = e => {
     e.preventDefault()
     console.log(this.state)
     const { line_id } = this.state;
     axios
-      .post('https://6e1fb152.ngrok.io/ctt/decreasing/' + line_id, this.state)
+      .post('https://localhost:3001/ctt/decreasing/' + line_id, this.state)
       .then(response => {
         console.log(response)
         this.setState({ data: response.data })
@@ -91,36 +100,24 @@ export default class Countctt extends Component {
       })
   }
 
-  toggle() {
-		this.setState({
-			shown: !this.state.shown
-		});
-	}
-
   render() {
     const { line_id } = this.state;
-    const num_dis = this.state.data.length;
-    const i = 0;
-
-    var shown = {
-			display: this.state.shown ? "block" : "none"
-		};
-		
-		var hidden = {
-			display: this.state.shown ? "none" : "block"
-		}
 
     return (
       <div className="App">
         <header className="App-header">
 
-          <div style = { hidden } className="form Count-ctt">
+          <div className="form Count-ctt">
 
-            <div>
+            {/* User already count in this day. */}
+            <div id="alreadyCount">
 
-              <div className="Show-data">
-                {this.state.line_id}
-              </div>
+            </div>
+
+            {/* User enter count page (First time of day) */}
+            <div id="newCount">
+
+              {this.state.line_id}
 
               <Form.Group>
                 <Form.Control
@@ -133,42 +130,50 @@ export default class Countctt extends Component {
 
               <Button variant="danger" type="submit" onClick={this.beginHandler}>
                 เริ่มนับ
-            </Button>
+              </Button>
 
             </div>
 
-            <Form>
+            {/* User comeback to count again. */}
+            <div id="continueCount">
+        
+            </div>
 
-              <Form.Group>
-                <Form.Label className="">12:00:00</Form.Label>
-              </Form.Group>
 
-              <Button variant="danger" type="submit" className="dec-margin" onClick={this.decHandler}>
-                ลด
-              </Button>
+            {/* ---------------------------------------------------------------------------------------------------------------------------- */}
+            {/* Countpage (obviously...) */}
+            <div id="countPage" style={{ display: 'none'}}>
+              <Form>
 
-              {/* ยังไม่ได้เขียนให้แสดงผลค่านับทีละอัน มันเลยดึงออกมาทีเดียวทั้งหมด */}
-              {/* {this.state.data.map ((data) => <a key={data._id} > {data.ctt_amount} </a> )} */}
-              {this.state.count}
+                <Form.Group>
+                  <Form.Label className="">12:00:00</Form.Label>
+                </Form.Group>
 
-              <Button variant="danger" type="submit" className="inc-margin" onClick={this.incHandler}>
-                เพิ่ม
-              </Button>
+                <Button variant="danger" type="submit" className="dec-margin" onClick={this.decHandler}>
+                  ลด
+                </Button>
 
-            </Form>
+                {/* {this.state.data.map ((data) => <a key={data._id} > {data.ctt_amount} </a> )} */}
+                {this.state.count}
+
+                <Button variant="danger" type="submit" className="inc-margin" onClick={this.incHandler}>
+                  เพิ่ม
+                </Button>
+
+              </Form>
+            </div>
+
+            {/* finished count (good) */}
+            <div style={{ display: 'none'}}>
+
+            </div>
+
+            {/* finished count (bad) */}
+            <div style={{ display: 'none'}}>
+              
+            </div>
 
           </div>
-
-          <div style = { shown } className="form Count-ctt">
-            <Form.Group>
-              <Form.Label className="">ยินดีด้วยค่ะ</Form.Label>
-              <br></br>
-              <Form.Label className="">วันนี้คุณแม่นับครบ 10 ครั้งแล้วค่ะ</Form.Label>
-              <br></br>
-              <Form.Label className="">(นับไม่ครบก็หน้านี้ ยังไม่ได้ทำหน้าใหม่)</Form.Label>
-            </Form.Group>
-          </div>
-
         </header>
       </div>
     );
